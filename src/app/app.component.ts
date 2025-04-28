@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { ProductCardComponent } from './product-card/product-card.component';
 
 @Component({
@@ -16,4 +15,8 @@ export class AppComponent {
   isShow = true;
 
   photoUrl = 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img';
+
+  onSetDisplay(isShow: boolean): void {
+    this.isShow = isShow;
+  }
 }
