@@ -18,6 +18,8 @@ export class AppComponent {
 
   createDate = new Date('2025/4/9');
 
+  price = 10000;
+
   onSetDisplay(isShow: boolean): void {
     this.isShow = isShow;
   }
