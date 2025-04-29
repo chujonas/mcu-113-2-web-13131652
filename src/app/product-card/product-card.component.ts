@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { booleanAttribute, Component, EventEmitter, Input, numberAttribute, Output } from '@angular/core';
+import { booleanAttribute, Component, EventEmitter, HostBinding, Input, numberAttribute, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
@@ -34,6 +34,9 @@ export class ProductCardComponent {
 
   @Input({ transform: numberAttribute })
   price!: number;
+
+  @HostBinding('class')
+  class = 'app-product-card';
 
   onSetDisplay(isShow: boolean): void {
     this.isShowChange.emit(isShow);
