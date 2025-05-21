@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { delay, Observable, of, tap } from 'rxjs';
 import { Product } from '../models/product';
 
 @Injectable({
@@ -112,11 +113,11 @@ export class ProductService {
     return this._data.find(({ id }) => id === productId)!;
   }
 
-  getList(name: string | undefined, index: number, size: number): { data: Product[]; count: number } {
+  getList(name: string | undefined, index: number, size: number): Observable<{ data: Product[]; count: number }> {
     const startIndex = (index - 1) * size;
     const endIndex = startIndex + size;
     const data = name ? this._data.filter((item) => item.name === name) : [...this._data];
-    return { data: data.slice(startIndex, endIndex), count: this._data.length };
+    return of({ data: data.slice(startIndex, endIndex), count: this._data.length }).pipe(delay(1000));
   }
 
   add(product: Readonly<Product>): void {
