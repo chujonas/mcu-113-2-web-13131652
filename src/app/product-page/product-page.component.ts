@@ -1,11 +1,10 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject, combineLatest, count, startWith, switchMap, tap } from 'rxjs';
-import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
 import { Product } from '../models/product';
-import { ProductService } from '../services/product.service';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-product-page',
@@ -18,35 +17,26 @@ export class ProductPageComponent {
 
   private productService = inject(ProductService);
 
-  private readonly pageIndex$ = new BehaviorSubject(1);
-  get pageIndex() {
-    return this.pageIndex$.value;
-  }
-  set pageIndex(value: number) {
-    this.pageIndex$.next(value);
-  }
+  readonly pageIndex = signal(1);
 
-  private readonly refresh$ = new Subject<void>();
+  readonly pageSize = signal(5);
 
-  pageSize = 5;
-
-  private readonly data$ = combineLatest([
-    this.pageIndex$.pipe(tap((value) => console.log('page index', value))),
-    this.refresh$.pipe(
-      startWith(undefined),
-      tap(() => console.log('refresh'))
-    ),
-  ]).pipe(switchMap(() => this.productService.getList(undefined, this.pageIndex, this.pageSize)));
-
-  private readonly data = toSignal(this.data$, { initialValue: { data: [], count: 0 } });
+  private readonly data = rxResource({
+    request: () => ({ pageIndex: this.pageIndex(), pageSize: this.pageSize() }),
+    defaultValue: { data: [], count: 0 },
+    loader: ({ request }) => {
+      const { pageIndex, pageSize } = request;
+      return this.productService.getList(undefined, pageIndex, pageSize);
+    },
+  });
 
   readonly totalCount = computed(() => {
-    const { count } = this.data();
+    const { count } = this.data.value();
     return count;
   });
 
   readonly products = computed(() => {
-    const { data } = this.data();
+    const { data } = this.data.value();
     return data;
   });
 
@@ -68,10 +58,10 @@ export class ProductPageComponent {
       createDate: new Date('2025/4/9'),
       price: 10000,
     });
-    this.productService.add(product).subscribe(() => this.refresh$.next());
+    this.productService.add(product).subscribe(() => this.data.reload());
   }
 
   onRemove({ id }: Product): void {
-    this.productService.remove(id).subscribe(() => (this.pageIndex = 1));
+    this.productService.remove(id).subscribe(() => this.pageIndex.set(1));
   }
 }
