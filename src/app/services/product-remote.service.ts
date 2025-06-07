@@ -23,7 +23,13 @@ export class ProductRemoteService extends ProductService {
       .get<{ data: Product[]; items: number }>(this.url, { params })
       .pipe(map(({ data, items: count }) => ({ data, count })));
   }
+
   override add(product: Readonly<Product>): Observable<Product> {
     return this.httpClient.post<Product>(this.url, { ...product });
+  }
+
+  override remove(productId: string): Observable<Product> {
+    const url = `${this.url}/${productId}`;
+    return this.httpClient.delete<Product>(url);
   }
 }
