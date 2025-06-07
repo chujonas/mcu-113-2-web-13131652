@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "書籍 A",
       "authors": [
         "作者甲",
@@ -15,7 +15,7 @@
       "price": 10000
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "書籍 B",
       "authors": [
         "作者甲",
@@ -29,7 +29,7 @@
       "price": 1000
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "書籍 C",
       "authors": [
         "作者甲",
@@ -43,7 +43,7 @@
       "price": 1000
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "書籍 D",
       "authors": [
         "作者甲",
@@ -57,7 +57,7 @@
       "price": 1000
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "書籍 E",
       "authors": [
         "作者甲",
@@ -71,7 +71,7 @@
       "price": 1000
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "書籍 F",
       "authors": [
         "作者甲",
@@ -85,7 +85,7 @@
       "price": 1000
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "書籍 G",
       "authors": [
         "作者甲",
@@ -99,7 +99,7 @@
       "price": 1000
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "書籍 H",
       "authors": [
         "作者甲",
@@ -111,6 +111,20 @@
       "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
       "createDate": "2023-10-17T00:00:00.000+08:00",
       "price": 1000
+    },
+    {
+      "id": "3507",
+      "name": "書籍 Z",
+      "company": "博碩文化",
+      "authors": [
+        "作者甲",
+        "作者乙",
+        "作者丙"
+      ],
+      "price": 10000,
+      "isShow": true,
+      "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
+      "createDate": "2025-04-08T16:00:00.000Z"
     }
   ]
 }
