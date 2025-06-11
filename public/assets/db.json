@@ -111,6 +111,18 @@
       "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
       "createDate": "2023-10-17T00:00:00.000+08:00",
       "price": 1000
+    },
+    {
+      "id": "767e",
+      "name": "書籍 123",
+      "company": "博碩文化",
+      "authors": [
+        "456"
+      ],
+      "price": 100,
+      "isShow": true,
+      "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
+      "createDate": "2025-06-11T11:10:21.733Z"
     }
   ]
 }
