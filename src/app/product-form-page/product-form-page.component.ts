@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Data } from '@angular/router';
 import { map } from 'rxjs';
 import { Product } from '../models/product';
@@ -16,16 +16,28 @@ export class ProductFormPageComponent implements OnInit {
 
   form = new FormGroup({
     id: new FormControl<string | null>(null),
-    name: new FormControl<string | null>(null),
+    name: new FormControl<string | null>(null, { validators: [Validators.required] }),
     authors: new FormArray<FormControl<string | null>>([]),
-    company: new FormControl<string | null>(null),
-    price: new FormControl<string | null>(null),
+    company: new FormControl<string | null>(null, { validators: [Validators.required] }),
+    price: new FormControl<string | null>(null, { validators: [Validators.required] }),
   });
 
   product!: Product;
 
+  get name(): FormControl<string | null> {
+    return this.form.get('name') as FormControl<string | null>;
+  }
+
   get authors(): FormArray<FormControl<string | null>> {
     return this.form.get('authors') as FormArray<FormControl<string | null>>;
+  }
+
+  get company(): FormControl<string | null> {
+    return this.form.get('company') as FormControl<string | null>;
+  }
+
+  get price(): FormControl<string | null> {
+    return this.form.get('price') as FormControl<string | null>;
   }
 
   ngOnInit(): void {
@@ -33,7 +45,7 @@ export class ProductFormPageComponent implements OnInit {
   }
 
   onAddAuthor(): void {
-    const formControl = new FormControl<string | null>(null);
+    const formControl = new FormControl<string | null>(null, { validators: [Validators.required] });
     this.authors.push(formControl);
   }
 }
