@@ -114,15 +114,15 @@
     },
     {
       "id": "767e",
-      "name": "書籍 123",
+      "name": "書籍 1230",
       "company": "博碩文化",
       "authors": [
         "456"
       ],
-      "price": 100,
+      "price": 10000,
       "isShow": true,
       "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
-      "createDate": "2025-06-11T11:10:21.733Z"
+      "createDate": "2025-06-11T12:30:15.201Z"
     }
   ]
 }
